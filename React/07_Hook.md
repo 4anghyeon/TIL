@@ -44,3 +44,40 @@ const setNumber = numberState[1]; <br>
   }
 ```
 >**_NOTE:_** 여기서 prevNumber => prevNumber + 1은 useState함수 안에서 정의 된 것으로 prevNumber에는 무조건 이전 값이 들어간다. (변수명이 preveNumber가 아니라 다른거여도 상관없다.)
+
+
+---
+
+
+## useRef로 특정 DOM 선택하기
+- Javascript에서 특정 DOM을 선택 할 때 getElementById나 jquery에서 $()를 사용했다.
+- 리액트에서도 특정 DOM을 선택해야 하는 상황이 있는데 그 때는 `ref` 를 사용한다.
+
+``` javascript
+import React, { useState, useRef } from 'react';
+
+function nameInput() {
+    const nameInput = useRef();
+
+    const onReset = () => {
+        setInputs({
+        name: '',
+        nickname: ''
+        });
+        nameInput.current.focus(); // ref = {nameInput} 으로 선언된 곳을 찾아서 focus해준다.
+    };
+
+    return (
+    <div>
+      <input
+        name="name"
+        placeholder="이름"
+        onChange={onChange}
+        value={name}
+        ref={nameInput}
+      />
+      <button onClick={onReset}>초기화</button>
+    </div>
+  );
+}
+```
